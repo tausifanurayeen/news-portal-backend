@@ -16,7 +16,13 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+            return ret;
+        }
+    }
 });
 
 // Match user entered password to hashed password in database

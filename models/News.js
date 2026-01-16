@@ -32,7 +32,13 @@ const newsSchema = new mongoose.Schema({
     },
     comments: [commentSchema],
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+            return ret;
+        }
+    }
 });
 
 const News = mongoose.model('News', newsSchema);
